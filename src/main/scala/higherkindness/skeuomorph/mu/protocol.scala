@@ -135,7 +135,7 @@ final case class Service[T](
 )
 object Service {
   final case class OperationType[T](tpe: T, stream: Boolean)
-  final case class Operation[T](name: String, request: OperationType[T], response: OperationType[T])
+  final case class Operation[T](name: String, arguments: (String, OperationType[T]), response: OperationType[T])
 }
 
 final case class DependentImport[T](pkg: String, protocol: String, tpe: T)

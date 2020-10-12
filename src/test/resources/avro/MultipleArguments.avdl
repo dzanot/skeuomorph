@@ -1,0 +1,16 @@
+@namespace("foo.bar")
+protocol MultipleArguments {
+
+  record Arg1 {
+    string arg1;
+  }
+  record Arg2 {
+    string arg1;
+  }
+
+  record Response {
+    string arg1;
+  }
+
+  foo.bar.Response sayHelloAvro(foo.bar.Arg1 arg1, foo.bar.Arg2 arg2);
+}

@@ -280,6 +280,7 @@ object codegen {
   ): Either[String, Decl.Def] =
     for {
       reqType  <- requestType(op.request, streamCtor)
+//      reqName  <- op.request.
       respType <- responseType(op.response, streamCtor)
     } yield q"def ${Term.Name(op.name)}(req: $reqType): $respType"
 
