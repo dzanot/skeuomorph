@@ -244,8 +244,12 @@ object codegen {
         }
       case TDate()    => t"_root_.java.time.LocalDate".asRight
       case TInstant() => t"_root_.java.time.Instant".asRight
-      case TDecimal(precision, scale) =>
-        t"_root_.scala.math.BigDecimal".asRight
+      case TDecimal(p, s) => {
+        val rs = q"_root_.shapeless"
+        val precision = t"$rs.${Type.Name(s"Nat_$p")}"
+        val scale = t"$rs.${Type.Name(s"Nat_$s")}"
+        t"_root_.shapeless.tag.@@[_root_.scala.math.BigDecimal, ($precision, $scale)]".asRight
+      }
     }
 
     scheme.cataM(algebra).apply(optimize(t))
